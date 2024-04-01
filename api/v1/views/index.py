@@ -11,7 +11,6 @@ from models.place import Place
 from models.review import Review
 
 
-
 @app_views.route('/status', strict_slashes=False)
 def status():
     '''return stuff'''
@@ -22,8 +21,8 @@ def status():
 def stats():
     '''return stats'''
     classes = {'states': State, 'users': User,
-            'amenities': Amenity, 'cities': City,
-            'places': Place, 'reviews': Review}
+               'amenities': Amenity, 'cities': City,
+               'places': Place, 'reviews': Review}
     new_dict = {}
     for key, value in classes.items():
         new_dict[key] = storage.count(value)
