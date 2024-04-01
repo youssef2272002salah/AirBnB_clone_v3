@@ -80,8 +80,8 @@ class DBStorage:
         if cls in classes.values() and id is not None:
             try:
                 return self.__session.query(
-                    classes[cls]).filter_by(
-                    id=id).first()
+                       classes[cls]).filter_by(
+                       id=id).first()
             except BaseException:
                 return None
         return None
