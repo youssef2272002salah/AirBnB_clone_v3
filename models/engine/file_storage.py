@@ -26,7 +26,7 @@ class FileStorage:
         """returns the dictionary __objects"""
         if not cls:
             return self.__objects
-        elif type(cls) == str:
+        elif isinstance(cls, str):
             return {k: v for k, v in self.__objects.items()
                     if v.__class__.__name__ == cls}
         else:
@@ -54,7 +54,7 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
+        except BaseException:
             pass
 
     def delete(self, obj=None):
@@ -69,8 +69,8 @@ class FileStorage:
 
     def get(self, cls, id):
         """Retrieve an object"""
-        if cls is not None and type(cls) is str and id is not None and\
-           type(id) is str and cls in classes:
+        if cls is not None and isinstance(cls, str) and id is not None and\
+           isinstance(id, str) and cls in classes:
             key = cls + '.' + id
             obj = self.__objects.get(key, None)
             return obj
@@ -80,7 +80,7 @@ class FileStorage:
     def count(self, cls=None):
         """Count number of objects in storage"""
         total = 0
-        if type(cls) == str and cls in classes:
+        if isinstance(cls, str) and cls in classes:
             total = len(self.all(cls))
         elif cls is None:
             total = len(self.__objects)
