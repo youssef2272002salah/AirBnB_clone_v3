@@ -17,7 +17,7 @@ def teardown_app(self):
 
 
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found(error):
     '''404 error'''
     return jsonify({'error': 'Not found'}), 404
 
