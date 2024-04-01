@@ -70,11 +70,13 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
+        '''get the class'''
         if cls in classes.values() and id is not None:
             return self.__objects.get(cls.__name__ + '.' + id)
         return None
 
     def count(self, cls=None):
+        '''Count the number of objects in storage'''
         if cls is None:
             return len(self.all())
         if cls in classes.values():
