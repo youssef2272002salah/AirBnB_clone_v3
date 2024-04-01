@@ -33,7 +33,7 @@ def delete_state(state_id):
         return jsonify({'error': 'Not found'}), 404
     storage.delete(the_state)
     storage.save()
-    return {}, 200
+    return jsonify({}), 200
 
 
 @app_views.route('/states', methods={'POST'}, strict_slashes=False)
