@@ -14,6 +14,7 @@ def all_amenities():
         new_list.append(amenity.to_dict())
     return jsonify(new_list)
 
+
 @app_views.route('/amenities/<string:amenity_id>', strict_slashes=False)
 def one_amenity(amenity_id):
     the_amenity = storage.get(Amenity, amenity_id)
@@ -22,9 +23,10 @@ def one_amenity(amenity_id):
     the_amenity = the_amenity.to_dict()
     return jsonify(the_amenity)
 
+
 @app_views.route('/amenities/<string:amenity_id>',
-                    methods=['DELETE'],
-                    strict_slashes=False)
+                 methods=['DELETE'],
+                 strict_slashes=False)
 def delete_amenity(amenity_id):
     the_amenity = storage.get(Amenity, amenity_id)
     if the_amenity is None:
@@ -33,9 +35,10 @@ def delete_amenity(amenity_id):
     storage.save()
     return jsonify({}), 200
 
+
 @app_views.route('/amenities',
-                    methods=['POST'],
-                    strict_slashes=False)
+                 methods=['POST'],
+                 strict_slashes=False)
 def create_amenity():
     new_amenity = request.get_json()
     if new_amenity is None:
@@ -47,9 +50,10 @@ def create_amenity():
     storage.save()
     return jsonify(amenity.to_dict()), 201
 
+
 @app_views.route('/amenities/<string:amenity_id>',
-                    methods=['PUT'],
-                    strict_slashes=False)
+                 methods=['PUT'],
+                 strict_slashes=False)
 def edit_amenity(amenity_id):
     new_amenity = request.get_json()
     the_amenity = storage.get(Amenity, amenity_id)
@@ -61,6 +65,7 @@ def edit_amenity(amenity_id):
         setattr(the_amenity, key, value)
     the_amenity.save()
     return jsonify(the_amenity.to_dict()), 200
+
 
 if __name__ == '__main__':
     pass

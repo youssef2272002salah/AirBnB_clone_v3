@@ -19,6 +19,7 @@ def all_cities(state_id):
             new_list.append(city.to_dict())
     return jsonify(new_list)
 
+
 @app_views.route('/cities/<string:city_id>', strict_slashes=False)
 def one_city(city_id):
     the_city = storage.get(City, city_id)
@@ -27,9 +28,10 @@ def one_city(city_id):
     the_city = the_city.to_dict()
     return jsonify(the_city)
 
+
 @app_views.route('/cities/<string:city_id>',
-                    methods=['DELETE'],
-                    strict_slashes=False)
+                 methods=['DELETE'],
+                 strict_slashes=False)
 def delete_city(city_id):
     the_city = storage.get(City, city_id)
     if the_city is None:
@@ -38,9 +40,10 @@ def delete_city(city_id):
     storage.save()
     return jsonify({}), 200
 
+
 @app_views.route('/states/<string:state_id>/cities',
-                    methods=['POST'],
-                    strict_slashes=False)
+                 methods=['POST'],
+                 strict_slashes=False)
 def create_city(state_id):
     the_state = storage.get(State, state_id)
     if the_state is None:
@@ -56,9 +59,10 @@ def create_city(state_id):
     storage.save()
     return jsonify(city.to_dict()), 201
 
+
 @app_views.route('/cities/<string:city_id>',
-                    methods=['PUT'],
-                    strict_slashes=False)
+                 methods=['PUT'],
+                 strict_slashes=False)
 def edit_city(city_id):
     new_city = request.get_json()
     the_city = storage.get(City, city_id)
@@ -71,6 +75,7 @@ def edit_city(city_id):
             setattr(the_city, key, value)
     the_city.save()
     return jsonify(the_city.to_dict()), 200
+
 
 if __name__ == '__main__':
     pass
